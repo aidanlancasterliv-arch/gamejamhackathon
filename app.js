@@ -54,7 +54,6 @@ const aisleView = document.getElementById('aisle-view');
 const shelfView = document.getElementById('shelf-view');
 const shelfTitle = document.getElementById('shelf-title');
 const shelfItems = document.getElementById('shelf-items');
-const shelfBackBtn = document.getElementById('shelf-back');
 const cashierBtn = document.getElementById('cashier-btn');
 const toastEl = document.getElementById('toast');
 
@@ -106,7 +105,9 @@ function startRound(recipe) {
 
   showScreen('market');
   renderBasketHud();
-  closeShelf();
+  shelfTitle.textContent = '';
+  shelfItems.innerHTML = '';
+  shelfView.classList.add('hidden');
   showToast('', false);
 
   startTimer();
@@ -159,13 +160,7 @@ function openShelf(aisleName) {
     shelfItems.appendChild(btn);
   });
 
-  aisleView.classList.add('hidden');
   shelfView.classList.remove('hidden');
-}
-
-function closeShelf() {
-  shelfView.classList.add('hidden');
-  aisleView.classList.remove('hidden');
 }
 
 function handleItemClick(item, itemEl) {
@@ -212,7 +207,6 @@ function showToast(message, visible) {
 aisleView.querySelectorAll('.aisle-hotspot').forEach((btn) => {
   btn.addEventListener('click', () => openShelf(btn.dataset.aisle));
 });
-shelfBackBtn.addEventListener('click', closeShelf);
 
 // ----- Timer (driven by elapsed real time, not frame count) -----
 function startTimer() {
