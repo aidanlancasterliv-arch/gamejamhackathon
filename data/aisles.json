@@ -1,0 +1,6 @@
+{
+  "Vegetables": ["Tomato", "Cucumber", "Bell pepper", "Lettuce", "Onion"],
+  "Carbs": ["Penne pasta", "Toast bread", "Spaghetti", "White bread", "Rice", "Tortilla wraps", "Bagels"],
+  "Proteins": ["Parmesan cheese", "Cheddar cheese slices", "Mozzarella cheese", "Chicken breast", "Eggs", "Tofu", "Ham"],
+  "Other": ["Pesto Genovese", "Pinch of salt", "Butter", "Ketchup", "Olive oil", "Tomato pesto", "Black pepper", "Sugar"]
+}

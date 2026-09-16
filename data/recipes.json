@@ -1,0 +1,12 @@
+[
+  {
+    "id": "pasta-pesto-basil",
+    "name": "Pasta Pesto Basil",
+    "ingredients": ["Penne pasta", "Pesto Genovese", "Parmesan cheese", "Pinch of salt"]
+  },
+  {
+    "id": "grilled-cheese-toast",
+    "name": "Grilled Cheese Toast",
+    "ingredients": ["Toast bread", "Cheddar cheese slices", "Butter"]
+  }
+]

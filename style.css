@@ -1,32 +1,221 @@
 /* Client/UI layer */
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+  min-height: 100vh;
   font-family: sans-serif;
-  transition: background-color 0.2s ease;
+  background: #f4f6f8;
+  color: #222;
 }
 
-#message {
-  font-size: 3rem;
-  color: white;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
 }
 
-#change-btn {
-  font-size: 1.2rem;
-  padding: 12px 28px;
+.screen { display: none; }
+.screen.active { display: block; }
+
+h1 { text-align: center; }
+
+.primary-btn, .cashier, #shelf-back, #play-again-btn {
+  font-size: 1.1rem;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background-color: white;
-  color: #333;
+  background: #2d7dfb;
+  color: white;
+  display: block;
+  margin: 24px auto 0;
 }
 
-#change-btn:hover {
-  background-color: #eee;
+.primary-btn:disabled, .cashier:disabled {
+  background: #b6c2d1;
+  cursor: not-allowed;
 }
+
+/* Avatar select */
+.avatar-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.avatar-option {
+  font-size: 2.5rem;
+  padding: 12px;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+}
+
+.avatar-option.selected {
+  border-color: #2d7dfb;
+  background: #e7f0ff;
+}
+
+/* Recipe select */
+.recipe-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.recipe-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  width: 260px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease;
+}
+
+.recipe-card:hover { transform: translateY(-2px); }
+
+.recipe-card h3 { margin-top: 0; }
+.recipe-card ul { margin: 0; padding-left: 20px; color: #555; }
+
+/* Market / HUD */
+.hud {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#timer-bar-track {
+  width: 100%;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#timer-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #2ecc71;
+  transition: background-color 0.3s ease;
+}
+
+#timer-bar-fill.warn { background: #f1c40f; }
+#timer-bar-fill.danger { background: #e74c3c; }
+
+#basket-progress {
+  font-weight: bold;
+  text-align: center;
+}
+
+#recipe-checklist {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+#recipe-checklist li {
+  background: white;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+#recipe-checklist li.done {
+  color: white;
+  background: #2ecc71;
+  text-decoration: line-through;
+}
+
+#aisle-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.aisle {
+  font-size: 1.3rem;
+  padding: 32px 12px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.aisle span { font-size: 1rem; }
+
+.cashier {
+  grid-column: 1 / -1;
+  background: #27ae60;
+  font-size: 1.2rem;
+}
+
+/* Shelf view */
+#shelf-view.hidden, #toast.hidden { display: none; }
+
+#shelf-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.shelf-item {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.shelf-item.collected {
+  background: #eee;
+  color: #aaa;
+  border-color: #eee;
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.shelf-item.shake {
+  animation: shake 0.3s ease;
+  border-color: #e74c3c;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Result */
+#screen-result h1 { font-size: 2.5rem; }
+#screen-result p { text-align: center; font-size: 1.1rem; }

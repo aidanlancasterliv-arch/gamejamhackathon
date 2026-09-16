@@ -5,16 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
-  <title>Hello from Vercel</title>
-  <link rel="stylesheet" href="style.css?v=001">
+  <title>Recipe Rush</title>
+  <link rel="stylesheet" href="style.css?v=002">
 </head>
 <body>
-  <!-- Client/UI layer -->
-  <main>
-    <h1 id="message">Hello from Vercel</h1>
-    <button id="change-btn">change</button>
+  <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
+  <main id="app">
+
+    <section id="screen-avatar" class="screen active">
+      <h1>Choose Your Shopper</h1>
+      <div id="avatar-grid" class="avatar-grid"></div>
+      <button id="avatar-continue" class="primary-btn" disabled>Continue</button>
+    </section>
+
+    <section id="screen-recipe" class="screen">
+      <h1>Pick a Recipe</h1>
+      <div id="recipe-grid" class="recipe-grid"></div>
+    </section>
+
+    <section id="screen-market" class="screen">
+      <div class="hud">
+        <div id="timer-bar-track"><div id="timer-bar-fill"></div></div>
+        <div id="basket-progress">Basket: <span id="basket-count">0</span>/<span id="basket-total">0</span></div>
+      </div>
+      <ul id="recipe-checklist"></ul>
+
+      <div id="aisle-view">
+        <button class="aisle" data-aisle="Vegetables">🥦<span>Vegetables</span></button>
+        <button class="aisle" data-aisle="Carbs">🍞<span>Carbs</span></button>
+        <button class="aisle" data-aisle="Proteins">🍗<span>Proteins</span></button>
+        <button class="aisle" data-aisle="Other">🧂<span>Other</span></button>
+        <button id="cashier-btn" class="cashier" disabled>🔒 Checkout</button>
+      </div>
+
+      <div id="shelf-view" class="hidden">
+        <button id="shelf-back">← Back to aisles</button>
+        <h2 id="shelf-title"></h2>
+        <div id="shelf-items"></div>
+      </div>
+
+      <div id="toast" class="hidden"></div>
+    </section>
+
+    <section id="screen-result" class="screen">
+      <h1 id="result-title"></h1>
+      <p id="result-detail"></p>
+      <button id="play-again-btn" class="primary-btn">Play Again</button>
+    </section>
+
   </main>
 
-  <script src="app.js?v=001"></script>
+  <script src="app.js?v=002"></script>
 </body>
 </html>
