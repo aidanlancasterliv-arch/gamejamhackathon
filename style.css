@@ -78,25 +78,36 @@ h1 { text-align: center; }
 }
 
 /* Avatar select */
-.avatar-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+#screen-avatar {
+  padding: 0;
 }
 
-.avatar-option {
-  font-size: 2.5rem;
-  padding: 12px;
+.avatar-img-wrap {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.avatar-hotspot {
+  position: absolute;
+  background: transparent;
   border: 3px solid transparent;
-  border-radius: 12px;
-  background: white;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
 }
 
-.avatar-option.selected {
-  border-color: #2d7dfb;
-  background: #e7f0ff;
+.avatar-hotspot:hover,
+.avatar-hotspot:focus-visible {
+  border-color: #f1c40f;
+  outline: none;
 }
 
 /* Recipe select */

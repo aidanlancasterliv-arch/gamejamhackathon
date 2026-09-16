@@ -14,7 +14,6 @@ window.GameLogic = {
   },
 };
 
-const AVATARS = ['🧑‍🍳', '🧑', '👩', '🧔', '👧', '🦸'];
 const TIMER_DURATION_MS = 30000;
 
 const state = {
@@ -43,8 +42,7 @@ const screens = {
 };
 
 const titleSelectAvatarBtn = document.getElementById('title-select-avatar-btn');
-const avatarGrid = document.getElementById('avatar-grid');
-const avatarContinueBtn = document.getElementById('avatar-continue');
+const avatarHotspots = document.querySelectorAll('.avatar-hotspot');
 const recipeGrid = document.getElementById('recipe-grid');
 
 const timerFill = document.getElementById('timer-bar-fill');
@@ -80,31 +78,15 @@ async function loadGameData() {
 }
 
 // ----- Avatar select -----
-function renderAvatars() {
-  avatarGrid.innerHTML = '';
-  AVATARS.forEach((avatar) => {
-    const btn = document.createElement('button');
-    btn.className = 'avatar-option';
-    btn.textContent = avatar;
-    btn.addEventListener('click', () => {
-      state.avatar = avatar;
-      document
-        .querySelectorAll('.avatar-option')
-        .forEach((el) => el.classList.remove('selected'));
-      btn.classList.add('selected');
-      avatarContinueBtn.disabled = false;
-    });
-    avatarGrid.appendChild(btn);
-  });
-}
-
 titleSelectAvatarBtn.addEventListener('click', () => {
   showScreen('avatar');
 });
 
-avatarContinueBtn.addEventListener('click', () => {
-  if (!state.avatar) return;
-  showScreen('recipe');
+avatarHotspots.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    state.avatar = btn.dataset.avatar;
+    showScreen('recipe');
+  });
 });
 
 // ----- Recipe select -----
@@ -141,11 +123,7 @@ function resetToStart() {
   state.recipe = null;
   state.basket = new Set();
   state.outcome = 'idle';
-  avatarContinueBtn.disabled = true;
-  document
-    .querySelectorAll('.avatar-option')
-    .forEach((el) => el.classList.remove('selected'));
-  showScreen('avatar');
+  showScreen('title');
 }
 
 // ----- Basket / checklist HUD -----
@@ -313,6 +291,5 @@ playAgainBtn.addEventListener('click', resetToStart);
 
 // ----- Boot -----
 loadGameData().then(() => {
-  renderAvatars();
   renderRecipes();
 });

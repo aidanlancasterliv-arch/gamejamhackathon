@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Recipe Rush</title>
-  <link rel="stylesheet" href="style.css?v=003">
+  <link rel="stylesheet" href="style.css?v=004">
 </head>
 <body>
   <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
@@ -20,9 +20,13 @@
     </section>
 
     <section id="screen-avatar" class="screen">
-      <h1>Choose Your Shopper</h1>
-      <div id="avatar-grid" class="avatar-grid"></div>
-      <button id="avatar-continue" class="primary-btn" disabled>Continue</button>
+      <div class="avatar-img-wrap">
+        <img src="assets/images/avatar-select.png" alt="Avatar selection screen" class="avatar-img">
+        <button class="avatar-hotspot" data-avatar="Aidan" aria-label="Select Aidan" style="left: 28.81%; top: 35.51%; width: 5.86%; height: 17.76%;"></button>
+        <button class="avatar-hotspot" data-avatar="Annika" aria-label="Select Annika" style="left: 34.67%; top: 35.51%; width: 5.86%; height: 17.76%;"></button>
+        <button class="avatar-hotspot" data-avatar="Maria" aria-label="Select Maria" style="left: 40.53%; top: 35.51%; width: 5.86%; height: 17.76%;"></button>
+        <button class="avatar-hotspot" data-avatar="Sid" aria-label="Select Sid" style="left: 46.39%; top: 35.51%; width: 5.86%; height: 17.76%;"></button>
+      </div>
     </section>
 
     <section id="screen-recipe" class="screen">
@@ -62,6 +66,6 @@
 
   </main>
 
-  <script src="app.js?v=003"></script>
+  <script src="app.js?v=004"></script>
 </body>
 </html>
