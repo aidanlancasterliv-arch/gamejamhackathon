@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Recipe Rush</title>
-  <link rel="stylesheet" href="style.css?v=004">
+  <link rel="stylesheet" href="style.css?v=005">
 </head>
 <body>
   <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
@@ -30,8 +30,11 @@
     </section>
 
     <section id="screen-recipe" class="screen">
-      <h1>Pick a Recipe</h1>
-      <div id="recipe-grid" class="recipe-grid"></div>
+      <div class="recipe-img-wrap">
+        <img src="assets/images/recipe-select.png" alt="Recipe selection screen" class="recipe-img">
+        <button class="recipe-hotspot" data-recipe-id="pasta-pesto-basil" aria-label="Select Pasta Pesto Basil" style="left: 16.11%; top: 26.03%; width: 32.23%; height: 59.25%;"></button>
+        <button class="recipe-hotspot" data-recipe-id="grilled-cheese-toast" aria-label="Select Grilled Cheese Toast" style="left: 49.32%; top: 26.03%; width: 31.74%; height: 59.25%;"></button>
+      </div>
     </section>
 
     <section id="screen-market" class="screen">
@@ -66,6 +69,6 @@
 
   </main>
 
-  <script src="app.js?v=004"></script>
+  <script src="app.js?v=005"></script>
 </body>
 </html>

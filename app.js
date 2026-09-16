@@ -43,7 +43,7 @@ const screens = {
 
 const titleSelectAvatarBtn = document.getElementById('title-select-avatar-btn');
 const avatarHotspots = document.querySelectorAll('.avatar-hotspot');
-const recipeGrid = document.getElementById('recipe-grid');
+const recipeHotspots = document.querySelectorAll('.recipe-hotspot');
 
 const timerFill = document.getElementById('timer-bar-fill');
 const basketCountEl = document.getElementById('basket-count');
@@ -90,19 +90,12 @@ avatarHotspots.forEach((btn) => {
 });
 
 // ----- Recipe select -----
-function renderRecipes() {
-  recipeGrid.innerHTML = '';
-  state.data.recipes.forEach((recipe) => {
-    const card = document.createElement('div');
-    card.className = 'recipe-card';
-    card.innerHTML = `
-      <h3>${recipe.name}</h3>
-      <ul>${recipe.ingredients.map((i) => `<li>${i}</li>`).join('')}</ul>
-    `;
-    card.addEventListener('click', () => startRound(recipe));
-    recipeGrid.appendChild(card);
+recipeHotspots.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const recipe = state.data.recipes.find((r) => r.id === btn.dataset.recipeId);
+    if (recipe) startRound(recipe);
   });
-}
+});
 
 // ----- Round lifecycle -----
 function startRound(recipe) {
@@ -290,6 +283,4 @@ function endRound(outcome) {
 playAgainBtn.addEventListener('click', resetToStart);
 
 // ----- Boot -----
-loadGameData().then(() => {
-  renderRecipes();
-});
+loadGameData();
