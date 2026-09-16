@@ -12,9 +12,36 @@ window.GameLogic = {
   isBasketComplete(basketSet, requiredIngredients) {
     return requiredIngredients.every((item) => basketSet.has(item));
   },
+  // Qualitative rating derived from how much time was left at checkout —
+  // no numeric score is stored, just a label + star count for the result screen.
+  getPerformanceRating(outcome, remainingPct) {
+    if (outcome !== 'win') {
+      return { stars: 0, label: 'PERFORMANCE: COLLAPSED.' };
+    }
+    if (remainingPct >= 50) {
+      return { stars: 5, label: 'PERFORMANCE: EXCELLENT! RECIPE MASTERED.' };
+    }
+    if (remainingPct >= 20) {
+      return { stars: 4, label: 'PERFORMANCE: GREAT! WELL SHOPPED.' };
+    }
+    return { stars: 3, label: 'PERFORMANCE: CUTTING IT CLOSE!' };
+  },
+  formatRemainingTime(seconds) {
+    const whole = Math.max(0, Math.round(seconds));
+    const minutes = Math.floor(whole / 60);
+    const secs = String(whole % 60).padStart(2, '0');
+    return `${minutes}:${secs}`;
+  },
 };
 
 const TIMER_DURATION_MS = 30000;
+
+const AVATAR_IMAGES = {
+  Aidan: 'assets/images/avatars/aidan.png',
+  Annika: 'assets/images/avatars/annika.png',
+  Maria: 'assets/images/avatars/maria.png',
+  Sid: 'assets/images/avatars/sid.png',
+};
 
 const state = {
   avatar: null,
@@ -57,8 +84,16 @@ const shelfItems = document.getElementById('shelf-items');
 const cashierBtn = document.getElementById('cashier-btn');
 const toastEl = document.getElementById('toast');
 
+const resultEyebrow = document.getElementById('result-eyebrow');
 const resultTitle = document.getElementById('result-title');
+const resultStars = document.getElementById('result-stars');
+const batteryFill = document.getElementById('battery-fill');
+const batteryPct = document.getElementById('battery-pct');
+const resultRemainingTime = document.getElementById('result-remaining-time');
+const resultRatingLine = document.getElementById('result-rating-line');
 const resultDetail = document.getElementById('result-detail');
+const resultAvatarImg = document.getElementById('result-avatar-img');
+const resultMoodBadge = document.getElementById('result-mood-badge');
 const playAgainBtn = document.getElementById('play-again-btn');
 
 // ----- Screen switching -----
@@ -260,13 +295,42 @@ cashierBtn.addEventListener('click', () => {
 function endRound(outcome) {
   state.outcome = outcome;
 
+  // Loss always means the clock hit 0; win captures whatever time was left
+  // on the bar the instant checkout was clicked.
+  const pct = outcome === 'win'
+    ? window.GameLogic.getRemainingPercent(state.timer.startTime, performance.now(), TIMER_DURATION_MS)
+    : 0;
+  const secondsRemaining = (pct / 100) * (TIMER_DURATION_MS / 1000);
+
+  screens.result.classList.remove('outcome-win', 'outcome-loss');
+  screens.result.classList.add(outcome === 'win' ? 'outcome-win' : 'outcome-loss');
+
   if (outcome === 'win') {
+    resultEyebrow.textContent = 'LEVEL SUCCESS · SCORE SCREEN';
     resultTitle.textContent = '🎉 You Win!';
     resultDetail.textContent = `You bagged everything for ${state.recipe.name} in time!`;
+    resultMoodBadge.textContent = '😄';
   } else {
+    resultEyebrow.textContent = 'LEVEL FAILED · SCORE SCREEN';
     resultTitle.textContent = "⏰ Time's Up!";
     resultDetail.textContent = `You collected ${state.basket.size}/${state.recipe.ingredients.length} ingredients for ${state.recipe.name}.`;
+    resultMoodBadge.textContent = '😢';
   }
+
+  const rating = window.GameLogic.getPerformanceRating(outcome, pct);
+  resultStars.innerHTML = Array.from(
+    { length: 5 },
+    (_, i) => `<span class="${i < rating.stars ? 'lit' : 'dim'}">★</span>`
+  ).join('');
+  resultRatingLine.textContent = rating.label;
+  resultRemainingTime.textContent = window.GameLogic.formatRemainingTime(secondsRemaining);
+
+  const roundedPct = Math.round(pct);
+  batteryFill.style.height = `${roundedPct}%`;
+  batteryPct.textContent = `${roundedPct}%`;
+
+  resultAvatarImg.src = AVATAR_IMAGES[state.avatar] || AVATAR_IMAGES.Maria;
+  resultAvatarImg.alt = `${state.avatar || 'Your shopper'} (${outcome === 'win' ? 'happy' : 'sad'})`;
 
   showScreen('result');
 }

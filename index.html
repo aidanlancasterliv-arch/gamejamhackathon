@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Recipe Rush</title>
-  <link rel="stylesheet" href="style.css?v=008">
+  <link rel="stylesheet" href="style.css?v=009">
 </head>
 <body>
   <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
@@ -74,13 +74,39 @@
     </section>
 
     <section id="screen-result" class="screen">
-      <h1 id="result-title"></h1>
-      <p id="result-detail"></p>
-      <button id="play-again-btn" class="primary-btn">Play Again</button>
+      <div class="result-card">
+        <p class="result-eyebrow" id="result-eyebrow"></p>
+        <h1 id="result-title"></h1>
+
+        <div class="result-body">
+          <div class="result-stats-left">
+            <div class="result-stars" id="result-stars"></div>
+            <div class="battery-shell">
+              <div class="battery-fill" id="battery-fill"></div>
+              <span class="battery-pct" id="battery-pct"></span>
+            </div>
+          </div>
+
+          <div class="result-stats-right">
+            <div class="result-info-box">
+              <p>Remaining Time: <span id="result-remaining-time"></span></p>
+              <p id="result-rating-line"></p>
+            </div>
+            <p class="result-detail" id="result-detail"></p>
+          </div>
+
+          <div class="result-avatar-wrap">
+            <img id="result-avatar-img" src="" alt="Your shopper" class="result-avatar-img">
+            <span class="result-mood-badge" id="result-mood-badge"></span>
+          </div>
+        </div>
+
+        <button id="play-again-btn" class="primary-btn">Play Again</button>
+      </div>
     </section>
 
   </main>
 
-  <script src="app.js?v=008"></script>
+  <script src="app.js?v=009"></script>
 </body>
 </html>

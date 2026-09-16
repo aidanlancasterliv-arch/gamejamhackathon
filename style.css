@@ -5,14 +5,17 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: sans-serif;
-  background: #f4f6f8;
+  background: #c9a06a; /* light brown, per hackathon feedback */
   color: #222;
+  display: flex;
+  justify-content: center;
 }
 
 #app {
   max-width: 720px;
   margin: 0 auto;
   padding: 24px 16px 64px;
+  zoom: 1.2; /* whole game rendered 20% larger, still centered via body flex */
 }
 
 #app:has(#screen-market.active) {
@@ -378,6 +381,196 @@ h1 { text-align: center; }
   font-size: 0.9rem;
 }
 
-/* Result */
-#screen-result h1 { font-size: 2.5rem; }
-#screen-result p { text-align: center; font-size: 1.1rem; }
+/* Result: win/loss score-screen styled after the parchment "Level Success" /
+   "Level Failed" mockups, populated dynamically from real round data. */
+.result-card {
+  background: radial-gradient(ellipse at top left, #f3dfa8, #dcb877 55%, #c99f5e 100%);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.result-eyebrow {
+  text-align: center;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #a8701f;
+  text-shadow: 0 0 8px rgba(255, 200, 120, 0.8);
+}
+
+#screen-result h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin: 4px 0 20px;
+}
+
+.outcome-win #result-title { color: #4a3218; }
+.outcome-loss #result-title { color: #8a2a1f; }
+
+.result-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.result-stats-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-stars {
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+}
+
+.result-stars .lit {
+  color: #f6c343;
+  text-shadow: 0 0 8px rgba(255, 210, 80, 0.9);
+}
+
+.result-stars .dim {
+  color: #8a8a8a;
+  opacity: 0.6;
+}
+
+.battery-shell {
+  position: relative;
+  width: 64px;
+  height: 100px;
+  border: 4px solid #7a4a22;
+  border-radius: 10px;
+  background: #2b1f1a;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.battery-shell::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 8px;
+  background: #7a4a22;
+  border-radius: 3px 3px 0 0;
+}
+
+.battery-fill {
+  width: 100%;
+  height: 0%;
+  transition: height 0.4s ease;
+}
+
+.outcome-win .battery-fill { background: linear-gradient(180deg, #6fe08a, #2ecc71); }
+.outcome-loss .battery-fill { background: linear-gradient(180deg, #e0432b, #8a2f1f); }
+
+.battery-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.result-stats-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 260px;
+}
+
+.result-info-box {
+  background: #f3e6c4;
+  border: 2px solid #6b4423;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 3px #fff7e0, inset 0 0 0 5px #b98a4a;
+  padding: 10px 16px;
+  font-weight: 700;
+  color: #3d2b1a;
+  text-align: center;
+  width: 100%;
+}
+
+.result-info-box p { margin: 4px 0; }
+
+.result-info-box #result-remaining-time {
+  color: #2ecc71;
+}
+
+.outcome-loss .result-info-box #result-remaining-time {
+  color: #e0432b;
+}
+
+.result-detail {
+  text-align: center;
+  font-weight: 600;
+  color: #3d2b1a;
+  margin: 0;
+}
+
+.result-avatar-wrap {
+  position: relative;
+  width: 90px;
+}
+
+.result-avatar-img {
+  width: 100%;
+  display: block;
+  image-rendering: pixelated;
+  border-radius: 8px;
+}
+
+.result-avatar-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 12%;
+  width: 76%;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.result-mood-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1.6rem;
+}
+
+.outcome-loss .result-avatar-img {
+  filter: grayscale(35%) brightness(0.88);
+  transform: rotate(-3deg);
+}
+
+.outcome-win .result-avatar-img {
+  animation: avatar-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes avatar-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+#screen-result .primary-btn {
+  background: #d99a3c;
+  border: 3px solid #6b4423;
+  box-shadow: inset 0 0 0 2px #f3e6c4;
+  color: #3d2b1a;
+  font-weight: 800;
+}
