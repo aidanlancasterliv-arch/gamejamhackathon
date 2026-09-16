@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Recipe Rush</title>
-  <link rel="stylesheet" href="style.css?v=009">
+  <link rel="stylesheet" href="style.css?v=011">
 </head>
 <body>
   <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
@@ -64,9 +64,11 @@
         </div>
 
         <aside class="market-sidebar">
-          <div id="basket-progress">Basket: <span id="basket-count">0</span>/<span id="basket-total">0</span></div>
-          <ul id="recipe-checklist"></ul>
-          <button id="cashier-btn" class="cashier" disabled>🔒 Checkout</button>
+          <div class="basket-panel">
+            <div id="basket-progress" class="basket-header">Basket: <span id="basket-count">0</span>/<span id="basket-total">0</span> <span class="basket-icon">🧺</span></div>
+            <ul id="recipe-checklist" class="basket-list"></ul>
+            <button id="cashier-btn" class="cashier" disabled><span class="lock-icon">🔒</span>Checkout<span class="lock-icon">🔒</span></button>
+          </div>
         </aside>
       </div>
 
@@ -107,6 +109,6 @@
 
   </main>
 
-  <script src="app.js?v=009"></script>
+  <script src="app.js?v=010"></script>
 </body>
 </html>

@@ -164,9 +164,10 @@ function renderBasketHud() {
 
   recipeChecklist.innerHTML = '';
   required.forEach((item) => {
+    const collected = state.basket.has(item);
     const li = document.createElement('li');
-    li.textContent = item;
-    if (state.basket.has(item)) li.classList.add('done');
+    li.className = collected ? 'done' : '';
+    li.innerHTML = `<span class="basket-checkbox">${collected ? '✔' : ''}</span><span class="basket-item-label">${item}</span>`;
     recipeChecklist.appendChild(li);
   });
 }
@@ -177,7 +178,9 @@ function updateCashierState() {
     state.recipe.ingredients
   );
   cashierBtn.disabled = !complete;
-  cashierBtn.textContent = complete ? '✅ Checkout' : '🔒 Checkout';
+  cashierBtn.classList.toggle('unlocked', complete);
+  const lockIcon = complete ? '🔓' : '🔒';
+  cashierBtn.innerHTML = `<span class="lock-icon">${lockIcon}</span>Checkout<span class="lock-icon">${lockIcon}</span>`;
 }
 
 // ----- Aisle / shelf interaction -----
