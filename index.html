@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Recipe Rush</title>
-  <link rel="stylesheet" href="style.css?v=005">
+  <link rel="stylesheet" href="style.css?v=006">
 </head>
 <body>
   <!-- Client/UI layer: screens for the game flow (avatar -> recipe -> market -> result) -->
@@ -38,24 +38,29 @@
     </section>
 
     <section id="screen-market" class="screen">
-      <div class="hud">
-        <div id="timer-bar-track"><div id="timer-bar-fill"></div></div>
-        <div id="basket-progress">Basket: <span id="basket-count">0</span>/<span id="basket-total">0</span></div>
-      </div>
-      <ul id="recipe-checklist"></ul>
+      <div class="market-layout">
+        <div class="market-main">
+          <div id="aisle-view" class="aisle-img-wrap">
+            <img src="assets/images/supermarket.png" alt="Supermarket aisles" class="aisle-img">
+            <button class="aisle-hotspot" data-aisle="Vegetables" aria-label="Vegetables aisle" style="left: 5.80%; top: 7.28%; width: 45.29%; height: 42.33%;"></button>
+            <button class="aisle-hotspot" data-aisle="Carbs" aria-label="Carbs aisle" style="left: 51.81%; top: 7.28%; width: 45.29%; height: 42.33%;"></button>
+            <button class="aisle-hotspot" data-aisle="Proteins" aria-label="Proteins aisle" style="left: 5.80%; top: 52.25%; width: 45.29%; height: 42.33%;"></button>
+            <button class="aisle-hotspot" data-aisle="Other" aria-label="Spices &amp; pantry aisle" style="left: 51.81%; top: 52.25%; width: 45.29%; height: 42.33%;"></button>
+          </div>
 
-      <div id="aisle-view">
-        <button class="aisle" data-aisle="Vegetables">🥦<span>Vegetables</span></button>
-        <button class="aisle" data-aisle="Carbs">🍞<span>Carbs</span></button>
-        <button class="aisle" data-aisle="Proteins">🍗<span>Proteins</span></button>
-        <button class="aisle" data-aisle="Other">🧂<span>Other</span></button>
-        <button id="cashier-btn" class="cashier" disabled>🔒 Checkout</button>
-      </div>
+          <div id="shelf-view" class="hidden">
+            <button id="shelf-back">← Back to aisles</button>
+            <h2 id="shelf-title"></h2>
+            <div id="shelf-items"></div>
+          </div>
+        </div>
 
-      <div id="shelf-view" class="hidden">
-        <button id="shelf-back">← Back to aisles</button>
-        <h2 id="shelf-title"></h2>
-        <div id="shelf-items"></div>
+        <aside class="market-sidebar">
+          <div id="timer-bar-track"><div id="timer-bar-fill"></div></div>
+          <div id="basket-progress">Basket: <span id="basket-count">0</span>/<span id="basket-total">0</span></div>
+          <ul id="recipe-checklist"></ul>
+          <button id="cashier-btn" class="cashier" disabled>🔒 Checkout</button>
+        </aside>
       </div>
 
       <div id="toast" class="hidden"></div>
@@ -69,6 +74,6 @@
 
   </main>
 
-  <script src="app.js?v=005"></script>
+  <script src="app.js?v=006"></script>
 </body>
 </html>

@@ -208,7 +208,7 @@ function showToast(message, visible) {
   toastTimeoutId = setTimeout(() => toastEl.classList.add('hidden'), 1200);
 }
 
-aisleView.querySelectorAll('.aisle').forEach((btn) => {
+aisleView.querySelectorAll('.aisle-hotspot').forEach((btn) => {
   btn.addEventListener('click', () => openShelf(btn.dataset.aisle));
 });
 shelfBackBtn.addEventListener('click', closeShelf);
