@@ -35,12 +35,14 @@ const state = {
 
 // ----- DOM refs -----
 const screens = {
+  title: document.getElementById('screen-title'),
   avatar: document.getElementById('screen-avatar'),
   recipe: document.getElementById('screen-recipe'),
   market: document.getElementById('screen-market'),
   result: document.getElementById('screen-result'),
 };
 
+const titleSelectAvatarBtn = document.getElementById('title-select-avatar-btn');
 const avatarGrid = document.getElementById('avatar-grid');
 const avatarContinueBtn = document.getElementById('avatar-continue');
 const recipeGrid = document.getElementById('recipe-grid');
@@ -95,6 +97,10 @@ function renderAvatars() {
     avatarGrid.appendChild(btn);
   });
 }
+
+titleSelectAvatarBtn.addEventListener('click', () => {
+  showScreen('avatar');
+});
 
 avatarContinueBtn.addEventListener('click', () => {
   if (!state.avatar) return;

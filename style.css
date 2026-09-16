@@ -37,6 +37,46 @@ h1 { text-align: center; }
   cursor: not-allowed;
 }
 
+/* Title screen */
+#screen-title {
+  padding: 0;
+}
+
+.title-img-wrap {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.title-img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.title-hotspot {
+  position: absolute;
+  left: 40.7%;
+  top: 47.8%;
+  width: 42.3%;
+  height: 18%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.title-hotspot:hover {
+  filter: brightness(1.15);
+}
+
+.title-hotspot:focus-visible {
+  outline: 3px solid #2d7dfb;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
 /* Avatar select */
 .avatar-grid {
   display: flex;
