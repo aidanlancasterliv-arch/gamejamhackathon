@@ -140,6 +140,7 @@ function startRound(recipe) {
 
   showScreen('market');
   renderBasketHud();
+  updateCashierState();
   shelfTitle.textContent = '';
   shelfItems.innerHTML = '';
   shelfView.classList.add('hidden');
