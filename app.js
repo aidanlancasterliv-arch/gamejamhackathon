@@ -46,6 +46,7 @@ const avatarHotspots = document.querySelectorAll('.avatar-hotspot');
 const recipeHotspots = document.querySelectorAll('.recipe-hotspot');
 
 const timerFill = document.getElementById('timer-bar-fill');
+const timerSecondsEl = document.getElementById('timer-seconds');
 const basketCountEl = document.getElementById('basket-count');
 const basketTotalEl = document.getElementById('basket-total');
 const recipeChecklist = document.getElementById('recipe-checklist');
@@ -250,12 +251,8 @@ function tickTimer(now) {
 
 function updateTimerBar(pct) {
   timerFill.style.width = `${pct}%`;
-  timerFill.classList.remove('warn', 'danger');
-  if (pct <= 15) {
-    timerFill.classList.add('danger');
-  } else if (pct <= 30) {
-    timerFill.classList.add('warn');
-  }
+  const secondsLeft = Math.ceil((pct / 100) * (TIMER_DURATION_MS / 1000));
+  timerSecondsEl.textContent = Math.max(0, Math.min(30, secondsLeft));
 }
 
 // ----- Cashier / checkout -----

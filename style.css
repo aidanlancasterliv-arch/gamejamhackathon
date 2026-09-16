@@ -180,23 +180,74 @@ h1 { text-align: center; }
   }
 }
 
-#timer-bar-track {
-  width: 100%;
-  height: 20px;
-  background: #ddd;
-  border-radius: 10px;
+/* Prominent pixel-art countdown bar, shown above the aisles */
+.timer-widget {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.timer-label {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #f6a83c;
+  text-shadow:
+    -2px -2px 0 #6b3a1f, 2px -2px 0 #6b3a1f,
+    -2px 2px 0 #6b3a1f, 2px 2px 0 #6b3a1f,
+    0 3px 0 #a85a2a;
+  flex: 0 0 auto;
+}
+
+.timer-track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 30px;
+  background: #2b1f1a;
+  border: 3px solid #7a4a32;
+  border-radius: 6px;
+  padding: 3px;
+  box-shadow: inset 0 0 0 2px #1a120f;
   overflow: hidden;
 }
 
-#timer-bar-fill {
-  height: 100%;
+.timer-fill {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  background: #2ecc71;
-  transition: background-color 0.3s ease;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #e0432b 0%, #f0812f 55%, #f9c24b 100%);
+  transition: width 0.1s linear;
 }
 
-#timer-bar-fill.warn { background: #f1c40f; }
-#timer-bar-fill.danger { background: #e74c3c; }
+/* Fixed-width segment dividers, drawn on top of the fill so they stay put
+   (matching the reference sprite) instead of stretching with the fill. */
+.timer-segments {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc(100% / 15 - 3px),
+    rgba(0, 0, 0, 0.35) calc(100% / 15 - 3px),
+    rgba(0, 0, 0, 0.35) calc(100% / 15)
+  );
+}
+
+.timer-readout {
+  flex: 0 0 auto;
+  background: #3a2a20;
+  border: 3px solid #a85a2a;
+  border-radius: 6px;
+  padding: 4px 14px;
+  color: #f6d9a8;
+  font-weight: 700;
+  font-size: 1.2rem;
+  min-width: 72px;
+  text-align: center;
+}
 
 #basket-progress {
   font-weight: bold;
